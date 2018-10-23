@@ -1,9 +1,8 @@
 const express = require('express');
 const helmet = require('helmet');
 const cors = require('cors');
-const bcrypt = require('bcryptjs');
 
-const db = require('./data/dbConfig.js');
+const userRoutes = require('./api/userRoutes');
 
 const server = express();
 
@@ -15,6 +14,8 @@ server.use(helmet());
 server.get('/', (req, res) => {
   res.send('Server is alive!');
 });
+
+server.use('/api', userRoutes);
 
 const PORT = process.env.PORT || 5300;
 
