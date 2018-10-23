@@ -1,25 +1,22 @@
 const express = require('express');
 const bcrypt = require('bcryptjs');
-const session = require('express-session');
+
 const db = require('../data/dbConfig.js');
+
 const router = express.Router();
 
-// router.use(session());
-
+// REGISTER USER
 router.post('/register/', (req, res) => {
   const credentials = req.body;
-  console.log(credentials);
   const hash = bcrypt.hashSync(credentials.password, 14);
   credentials.password = hash;
-
-  console.log(hash);
 
   db('users')
     .insert(credentials)
     .then(ids => {
       console.log('then');
       const id = ids[0];
-      user.username;
+      // user.username;
       res.status(201).json({ newUserId: id });
     })
     .catch(err => {
@@ -27,4 +24,19 @@ router.post('/register/', (req, res) => {
       res.status(500).json(err);
     });
 });
+
+// USER LOGIN
+// router.post('/', (req, res) => {
+//   const credentials = req.body;
+
+//   db('users')
+//     .where({ username: credentials.username })
+//     .first()
+//     .then(user => {
+//       if (user && bcrypt.compareSync(creds.password, user.password)) {
+//         req.session.username = username;
+//       }
+//     });
+// });
+
 module.exports = router;
