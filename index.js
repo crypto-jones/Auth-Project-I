@@ -3,7 +3,7 @@ const helmet = require('helmet');
 const cors = require('cors');
 const bcrypt = require('bcryptjs');
 
-// const db = require('./data/dbConfig.js');
+const db = require('./data/dbConfig.js');
 
 const server = express();
 
@@ -11,6 +11,7 @@ server.use(express.json());
 server.use(cors());
 server.use(helmet());
 
+// Sanity Check Route
 server.get('/', (req, res) => {
   res.send('Server is alive!');
 });
