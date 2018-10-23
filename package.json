@@ -1,0 +1,28 @@
+{
+  "name": "auth-project-i",
+  "version": "1.0.0",
+  "description": "Auth Practice",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/crypto-jones/Auth-Project-I.git"
+  },
+  "author": "Jeremy A. Jones",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/crypto-jones/Auth-Project-I/issues"
+  },
+  "homepage": "https://github.com/crypto-jones/Auth-Project-I#readme",
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "cors": "^2.8.4",
+    "express": "^4.16.4",
+    "helmet": "^3.14.0",
+    "knex": "^0.15.2",
+    "nodemon": "^1.18.4"
+  }
+}
