@@ -6,7 +6,7 @@ const db = require('../data/dbConfig.js');
 const router = express.Router();
 
 // REGISTER USER
-router.post('/register/', (req, res) => {
+router.post('/register', (req, res) => {
   const credentials = req.body;
   const hash = bcrypt.hashSync(credentials.password, 14);
   credentials.password = hash;
@@ -60,6 +60,7 @@ router.get('/users', protected, (req, res) => {
   db('users')
     .select('id', 'username', 'password')
     .then(users => {
+      console.log(users);
       res.json(users);
     })
     .catch(err => res.send(err));

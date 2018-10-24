@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 
-class Login extends Component {
+class Register extends Component {
   state = {
     username: '',
     password: '',
@@ -10,56 +10,71 @@ class Login extends Component {
 
   handleChange = e => {
     e.preventDefault();
-    this.setState({ [e.target.name]: e.target.value });
+    this.setState({
+      [e.target.name]: e.target.value
+    });
   };
 
   handleSubmit = e => {
     e.preventDefault();
-    const login = {
+    const register = {
       username: this.state.username,
       password: this.state.password
     };
 
     axios
-      .post('http://localhost:5300/api/login', login)
+      .post('http://localhost:5300/api/register', register)
+
       .then(res => {
-        console.log(res.data);
+        console.log(res);
         if (res.data.welcome !== '') {
           this.setState({ loggedIn: true });
           this.props.history.push('/welcome');
         } else {
-          this.props.history.push('/register');
+          alert('Failed to register. Please try again.');
         }
       })
       .catch(err => {
-        this.props.history.push('/unauthorized');
+        console.log('This is error: ', err);
+        if (err) {
+          alert('Username already exists');
+        }
+        this.props.history.push('/');
       });
+  };
+
+  handleRedirect = () => {
+    this.props.history.push('/login');
   };
 
   render() {
     return (
       <div>
-        <h2>Login</h2>
+        <h2>Register</h2>
         <form>
           <input
             type="text"
             name="username"
-            placeholder="Username"
-            value={this.state.username}
+            placeholder="Enter a username"
             onChange={this.handleChange}
+            value={this.state.username}
           />
           <input
             type="password"
             name="password"
-            placeholder="Password"
-            value={this.state.password}
+            placeholder="Enter a password"
             onChange={this.handleChange}
+            value={this.state.password}
           />
           <button onClick={this.handleSubmit}>Submit</button>
         </form>
+        <div>
+          <h4>Already have an account?</h4>
+          <button onClick={this.handleRedirect}>Login</button>
+        </div>
       </div>
     );
   }
 }
 
-export default Login;
+export default Register;
