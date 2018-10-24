@@ -26,7 +26,7 @@ class Login extends Component {
         console.log(res.data);
         if (res.data.welcome !== '') {
           this.setState({ loggedIn: true });
-          this.props.history.push('/profile');
+          this.props.history.push('/welcome');
         } else {
           this.props.history.push('/register');
         }
@@ -49,7 +49,7 @@ class Login extends Component {
             onChange={this.handleChange}
           />
           <input
-            type="text"
+            type="password"
             name="password"
             placeholder="Password"
             value={this.state.password}
